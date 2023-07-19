@@ -1,6 +1,6 @@
 # Mahirun
 
-This is TKY craft BackEnd API for Discord bot.
+This is TKYcraft BackEnd API for Discord bot.
 
 
 

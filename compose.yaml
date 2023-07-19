@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     image: "tkycraft/mahirun:ruby3-rails7-0.0.1"
-    container_name: rails
+    container_name: mahirun-server
     volumes:
       - .:/opt/app/
     ports:

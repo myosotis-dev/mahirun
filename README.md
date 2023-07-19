@@ -1,24 +1,44 @@
-# hands on Ruby on Rails7 MySQL
+# Mahirun
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is TKYcraft BackEnd API for Discord bot.
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+## Getting started (for development)
 
-* Configuration
+on your Docker host.
 
-* Database creation
+```bash
+docker compose up -d --build   # up containers with build process.
+docker compose ps   # check running containers.
+docker compose down   # down containers.
+```
 
-* Database initialization
+
+
+### options
+
+* Ruby version : 3.2.2 (configure on Dockerfile, Gemfile)
+
+* Database creation / initialization
+
+  ```bash
+  docker exec -it rails rails db:migrate reset
+  # or exec bash.
+  ```
+
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+  ```bash
+  docker exec -it rails rails t
+  # or exec bash
+  ```
+
+* Services
+
+  - You should reference compose.yaml
 
 * Deployment instructions
 
-* ...
+  - This is not Production.

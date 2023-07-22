@@ -10,5 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_151017) do
+  create_table "servers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "discord_server_id", null: false
+    t.integer "music_volume", default: 5, null: false
+    t.boolean "is_read_unconnected_user_message", default: false, null: false
+    t.boolean "is_read_user_name", default: true, null: false
+    t.boolean "is_read_message", default: true, null: false
+    t.boolean "is_auto_join", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

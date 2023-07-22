@@ -33,10 +33,10 @@ services:
       - mysql-store:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "$MYSQL_DATABASE", "-p$MYSQL_ROOT_PASSWORD"]
-      interval: 30s
+      interval: 5s
       timeout: 5s
       retries: 12
-      start_period: 30s
+      start_period: 5s
 
 volumes:
   mysql-store:

@@ -31,7 +31,7 @@ docker compose down   # down containers.
 * How to run the test suite
 
   ```bash
-  docker exec -it rails rails t
+  docker exec -it bundle exec rspec
   # or exec bash
   ```
 

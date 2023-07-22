@@ -33,7 +33,7 @@ class Server < ApplicationRecord
 			return
 		end
 		unless str == (str.to_i.to_s)
-			errors.add(:discord_server_id, "must be convertable to integer.")
+			errors.add(:discord_server_id, "must be convertable to Integer.")
 		end
 	end
 

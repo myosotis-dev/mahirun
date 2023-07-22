@@ -29,7 +29,7 @@ class Server < ApplicationRecord
 	def valid_discord_server_id?
 		str = self[:discord_server_id].freeze
 		unless str.kind_of?(String)
-			errors.add(:discord_server_id, "must be string.")
+			errors.add(:discord_server_id, "must be String.")
 			return
 		end
 		unless str == (str.to_i.to_s)

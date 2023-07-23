@@ -167,14 +167,14 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (4.1.2)
-      actionpack (>= 4.2)
-      activesupport (>= 4.2)
-      railties (>= 4.2)
-      rspec-core (~> 3.10)
-      rspec-expectations (~> 3.10)
-      rspec-mocks (~> 3.10)
-      rspec-support (~> 3.10)
+    rspec-rails (6.0.3)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
     rspec-support (3.12.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -209,7 +209,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 6.0)
   rails (~> 7.0.4)
-  rspec-rails (~> 4.1.0)
+  rspec-rails (~> 6.0.0)
   sprockets-rails
   tzinfo-data
   web-console

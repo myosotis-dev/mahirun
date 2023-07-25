@@ -23,7 +23,7 @@ services:
       start_period: 10s
 
   mysql:
-    image: mysql:8.0.33-oracle   # arm image (only oracle linux base)
+    image: mysql:8.0.34-oracle   # arm image (only oracle linux base)
     container_name: mysql
     env_file:
       - ./.env

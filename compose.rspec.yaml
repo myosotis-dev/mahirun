@@ -1,0 +1,17 @@
+services:
+  app:
+    environment:
+      - RAILS_ENV=test
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: "tkycraft/mahirun:rspec1.0"
+    volumes: []
+    healthcheck: {}
+    command: []
+
+  mysql:
+    volumes: []
+    healthcheck: {}

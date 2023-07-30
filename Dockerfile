@@ -39,4 +39,4 @@ RUN bundle install
 
 EXPOSE 3000
 
-CMD ["sh", "entrypoint.sh"]
+ENTRYPOINT ["sh", "entrypoint.sh"]

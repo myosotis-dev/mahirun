@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::V1::Servers", type: :request do
+RSpec.describe "Discordbot::Api::V1::Servers", type: :request do
 	describe "show action" do
 		it "success 200" do
 			# Arrange
@@ -8,7 +8,7 @@ RSpec.describe "Api::V1::Servers", type: :request do
 			s = Server.create!(discord_server_id: _id)
 
 			# Act
-			get api_v1_server_path(_id)
+			get discordbot_api_v1_server_path(_id)
 			res = JSON.parse(response.body)
 
 			# Assert
@@ -26,7 +26,7 @@ RSpec.describe "Api::V1::Servers", type: :request do
 			s.destroy!
 
 			# Act
-			get api_v1_server_path(_id)
+			get discordbot_api_v1_server_path(_id)
 			res = JSON.parse(response.body)
 
 			# Assert

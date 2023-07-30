@@ -23,7 +23,7 @@ docker compose down   # down containers.
 * Database creation / initialization
 
   ```bash
-  docker exec -it rails rails db:migrate reset
+  docker exec -it mahirun-server rails db:migrate reset
   # or exec bash.
   ```
 
@@ -31,7 +31,7 @@ docker compose down   # down containers.
 * How to run the test suite
 
   ```bash
-  docker exec -it bundle exec rspec
+  docker exec -it mahirun-server bundle exec rspec
   # or exec bash
   ```
 

@@ -2,8 +2,6 @@ services:
   app:
     environment:
       - RAILS_ENV=test
-    depends_on:
-      - mysql
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -14,4 +12,3 @@ services:
 
   mysql:
     volumes: []
-    healthcheck: {}

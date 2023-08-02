@@ -6,9 +6,13 @@ services:
       context: .
       dockerfile: ./Dockerfile
     image: "tkycraft/mahirun:rspec1.0"
+    depends_on: {}
     volumes: []
     healthcheck: {}
     entrypoint: []
 
   mysql:
     volumes: []
+    deploy:
+      mode: replicated
+      replicas: 0

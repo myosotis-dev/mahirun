@@ -2,13 +2,19 @@ services:
   app:
     environment:
       - RAILS_ENV=test
+      - MYSQL_HOST=127.0.0.1
     build:
       context: .
       dockerfile: ./Dockerfile
     image: "tkycraft/mahirun:rspec1.0"
+    depends_on: {}
     volumes: []
     healthcheck: {}
     entrypoint: []
+    network_mode: host
 
   mysql:
     volumes: []
+    deploy:
+      mode: replicated
+      replicas: 0

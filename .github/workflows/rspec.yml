@@ -22,14 +22,13 @@ jobs:
       MYSQL_DATABASE: app_test
     steps:
     - uses: actions/checkout@v3
-    # - name: build and create DB
-    #   shell: bash
-    #   run: |
-    #     sudo systemctl start mysql.service
-    #     docker-compose -f compose.yaml -f compose.rspec.yaml build
-    #     docker-compose -f compose.yaml -f compose.rspec.yaml run app rails db:create
-    #   env:
-    #     RAILS_ENV: test
+    - name: build and create DB
+      shell: bash
+      run: |
+        docker-compose -f compose.yaml -f compose.rspec.yaml build
+        docker-compose -f compose.yaml -f compose.rspec.yaml run app rails db:create
+      env:
+        RAILS_ENV: test
     - name: exec rspec
       run:  |
         docker-compose -f compose.yaml -f compose.rspec.yaml run app bundle exec rspec

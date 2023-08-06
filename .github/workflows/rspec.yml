@@ -16,10 +16,10 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: root
+          MYSQL_DATABASE: app_test
     env: 
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: root
+      MYSQL_DATABASE: app_test
     steps:
     - uses: actions/checkout@v3
     # - name: build and create DB

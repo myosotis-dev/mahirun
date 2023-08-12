@@ -18,3 +18,9 @@ services:
     deploy:
       mode: replicated
       replicas: 0
+
+  keycloak:
+    volumes: []
+    deploy:
+      mode: replicated
+      replicas: 0

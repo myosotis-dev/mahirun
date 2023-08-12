@@ -22,6 +22,10 @@ jobs:
       MYSQL_DATABASE: app_test
     steps:
     - uses: actions/checkout@v3
+    - name: copy sample .env
+      shell: bash
+      run: |
+        cp .env.sample .env
     - name: build and create DB
       shell: bash
       run: |

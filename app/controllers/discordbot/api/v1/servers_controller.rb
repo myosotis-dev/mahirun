@@ -1,4 +1,4 @@
-class Discordbot::Api::V1::ServersController < ApplicationController
+class Discordbot::Api::V1::ServersController < ApplicationApiController
 	def show
 		@server = Server.find_by(discord_server_id: params[:id])
 		if @server.nil?

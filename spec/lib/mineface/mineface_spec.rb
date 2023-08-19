@@ -107,6 +107,117 @@ RSpec.describe Mineface::Face do
 				end
 			end
 		end
+
+		describe "get_minecraft_profile()" do
+			context "give correct uuid" do
+				it "returns correct profile" do
+					face = Mineface::Face.new
+					# This is uuid of KrisJelbring, he is developer of minecraft.
+					uuid = "7125ba8b1c864508b92bb5c042ccfe2b"
+					profile = face.get_minecraft_profile uuid
+					
+					expect(profile["id"]).to eq uuid
+					expect(profile["name"]).to eq "KrisJelbring"
+					expect(profile["properties"]).to be_present
+
+					expect(profile["properties"].first["name"]).to eq "textures"
+					expect(profile["properties"].first["value"]).to be_present
+					expect(profile["properties"].first["value"]["profileId"]).to eq uuid
+					expect(profile["properties"].first["value"]["profileName"]).to eq "KrisJelbring"
+
+					textures = profile["properties"].first["value"]["textures"]
+					expect(textures).to be_present
+					expect(textures["SKIN"]).to be_present
+					expect(textures["SKIN"]["url"]).to be_present
+					expect(textures["CAPE"]).to be_present
+					expect(textures["CAPE"]["url"]).to be_present
+				end
+			end
+
+			context "give none-existent uuid" do
+				it "raise GetProfileError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile "foo"}.to raise_error(Mineface::GetProfileError)
+				end
+			end
+
+			context "give nothing" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile}.to raise_error(ArgumentError)
+				end
+			end
+
+			context "give argument which is not String" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile -1}.to raise_error(ArgumentError)
+				end
+			end
+
+			context "give empty String" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile ""}.to raise_error(ArgumentError)
+				end
+			end
+
+			context "give nil" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile}.to raise_error(ArgumentError)
+				end
+			end
+		end
+
+		describe "get_skin_image_url()" do
+			context "give correct uuid" do
+				it "returns correct url" do
+					face = Mineface::Face.new
+					# This is uuid of KrisJelbring, he is developer of minecraft.
+					uuid = "7125ba8b1c864508b92bb5c042ccfe2b"
+					image_url = face.get_skin_image_url uuid
+					expect(image_url).to eq "http://textures.minecraft.net/texture/b47b21bb3e7f79bdf2a5e8e041f7ff9e178dc15645f6449b8e55f906604c07f9"
+				end
+			end
+
+			context "give none-existent uuid" do
+				it "raise GetProfileError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile "foo"}.to raise_error(Mineface::GetProfileError)
+				end
+			end
+
+			context "give nothing" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile}.to raise_error(ArgumentError)
+				end
+			end
+
+			context "give argument which is not String" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile -1}.to raise_error(ArgumentError)
+				end
+			end
+
+			context "give empty String" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile ""}.to raise_error(ArgumentError)
+				end
+			end
+
+			context "give nil" do
+				it "raise ArgumentError" do
+					face = Mineface::Face.new
+					expect{face.get_minecraft_profile}.to raise_error(ArgumentError)
+				end
+			end
+
+			# TODO: add case of GetSkinUrlError
+		end
 	end
 
 	describe "error class" do
@@ -125,5 +236,7 @@ RSpec.describe Mineface::Face do
 				}.to raise_error(Mineface::APIRequestError)
 			end
 		end
+
+		# TODO: add others Error class
 	end
 end

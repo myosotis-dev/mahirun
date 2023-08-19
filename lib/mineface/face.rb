@@ -5,8 +5,21 @@ module Mineface
 	require 'base64'
 
 	class Face
-		def initialize options={}
-			
+		attr_reader :name, :uuid, :skin_image_url, :size, :image
+		def initialize options={name: nil, size: 512}
+			@name = options[:name]
+			@size = options[:size]
+			@skin_image_url = nil
+			@uuid = nil
+			@image = nil
+		end
+
+		def request!
+			raise FaceRequestError if @name.nil?
+			@uuid = get_minecraft_uuid(@name)
+			@skin_image_url = get_skin_image_url(@uuid)
+			@image = get_face_image(@skin_image_url)
+			return
 		end
 
 		def get_minecraft_uuid name=""
@@ -114,6 +127,12 @@ module Mineface
 
 	class GetSkinUrlError < StandardError
 		def initialize msg="Can't get Profile."
+			super msg
+		end
+	end
+
+	class FaceRequestError < StandardError
+		def initialize msg="Can't request face image."
 			super msg
 		end
 	end

@@ -55,6 +55,19 @@ module Mineface
 			return _url
 		end
 
+		def get_face_image skin_image_url="", size=512
+			raise ArgumentError unless skin_image_url.kind_of? String
+			raise ArgumentError if skin_image_url == ""
+			raise ArgumentError unless size.kind_of? Integer
+			raise ArgumentError unless size%8==0
+
+			image = image = Magick::Image.read(skin_image_url).first
+			image = image.crop(8,8,8,8)   # crop face area.
+			image.sample!(size,size)   # resize image.
+
+			return image   # => Magick::Image
+		end
+
 		def request_json _url=""
 			raise ArgumentError unless _url.kind_of? String
 			raise ArgumentError if _url == ""

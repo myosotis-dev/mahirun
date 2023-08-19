@@ -8,11 +8,24 @@ RSpec.describe Mineface::Face do
 	end
 
 	describe "methods" do
+		describe "initialize()" do
+			context "give arguments" do
+				it "set instance variables" do
+					_n = "KrisJelbring"   # KrisJelbring is developer of minecraft
+					_s = 1024
+
+					face = Mineface::Face.new name: _n, size: _s
+
+					expect(face.name).to eq _n
+					expect(face.size).to eq _s
+				end
+			end
+		end
+
 		describe "get_minecraft_uuid()" do
 			context "give correct name" do
 				it "returns currect uuid" do
 					face = Mineface::Face.new
-					# KrisJelbring is developer of minecraft
 					uuid = face.get_minecraft_uuid 'KrisJelbring'
 					expect(uuid).to eq "7125ba8b1c864508b92bb5c042ccfe2b"
 				end
@@ -219,12 +232,119 @@ RSpec.describe Mineface::Face do
 			# TODO: add case of GetSkinUrlError
 		end
 
-		describe "get_face_image()"
-		describe "request!()"
+		describe "get_face_image()" do
+			context "give correct arguments" do
+				it "returns image" do
+					url = "http://textures.minecraft.net/texture/b47b21bb3e7f79bdf2a5e8e041f7ff9e178dc15645f6449b8e55f906604c07f9"
+					face = Mineface::Face.new
+					expect(face.get_face_image(url).class).to eq Magick::Image
+				end
+			end
+
+			context "give bad value to skin_image_url" do
+				context "give nothing" do
+					it "raise ArgumentError" do
+						face = Mineface::Face.new
+						expect{face.get_face_image}.to raise_error ArgumentError
+					end
+				end
+
+				context "give value which is not String" do
+					it "raise ArgumentError" do
+						face = Mineface::Face.new
+						expect{face.get_face_image -1}.to raise_error ArgumentError
+					end
+				end
+
+				context "give empty String" do
+					it "raise ArgumentError" do
+						face = Mineface::Face.new
+						expect{face.get_face_image ""}.to raise_error ArgumentError
+					end
+				end
+
+				context "give nil" do
+					it "raise ArgumentError" do
+						face = Mineface::Face.new
+						expect{face.get_face_image nil}.to raise_error ArgumentError
+					end
+				end
+			end
+
+			context "give bad value to size" do
+				context "give value which is not Integer" do
+					it "raise ArgumentError" do
+						url = "http://textures.minecraft.net/texture/b47b21bb3e7f79bdf2a5e8e041f7ff9e178dc15645f6449b8e55f906604c07f9"
+						face = Mineface::Face.new
+						expect{face.get_face_image url, "string"}.to raise_error ArgumentError
+					end
+				end
+
+				context "give value which is not multiple of 8" do
+					it "raise ArgumentError" do
+						url = "http://textures.minecraft.net/texture/b47b21bb3e7f79bdf2a5e8e041f7ff9e178dc15645f6449b8e55f906604c07f9"
+						face = Mineface::Face.new
+						expect{face.get_face_image url, 11}.to raise_error ArgumentError
+					end
+				end
+
+				context "give minus value" do
+					it "raise ArgumentError" do
+						url = "http://textures.minecraft.net/texture/b47b21bb3e7f79bdf2a5e8e041f7ff9e178dc15645f6449b8e55f906604c07f9"
+						face = Mineface::Face.new
+						expect{face.get_face_image url, -1}.to raise_error ArgumentError
+					end
+				end
+
+				context "give nil" do
+					it "raise ArgumentError" do
+						url = "http://textures.minecraft.net/texture/b47b21bb3e7f79bdf2a5e8e041f7ff9e178dc15645f6449b8e55f906604c07f9"
+						face = Mineface::Face.new
+						expect{face.get_face_image url, nil}.to raise_error ArgumentError
+					end
+				end
+			end
+		end
+
+		describe "request!()" do
+			context "set name to instance correctly" do
+				it "set some instance variables" do
+					face = Mineface::Face.new name: "KrisJelbring"
+					face.request!
+					expect(face.uuid).to be_present
+					expect(face.skin_image_url).to be_present
+					expect(face.image).to be_present
+				end
+
+				it "returns nil" do
+					face = Mineface::Face.new name: "KrisJelbring"
+					expect(face.request!).to eq nil
+				end
+
+				it "not raise errors" do
+					face = Mineface::Face.new name: "KrisJelbring"
+					expect{face.request!}.not_to raise_error
+				end
+			end
+
+			context "not set name to instance" do
+				it "raise FaceRequestError" do
+					face = Mineface::Face.new
+					expect{face.request!}.to raise_error Mineface::FaceRequestError
+				end
+			end
+		end
 	end
 
 	describe "instance variables" do
-		
+		it "default values" do
+			face = Mineface::Face.new
+			expect(face.name).to eq nil
+			expect(face.uuid).to eq nil
+			expect(face.skin_image_url).to eq nil
+			expect(face.image).to eq nil
+			expect(face.size).to eq 512
+		end
 	end
 
 	describe "error class" do

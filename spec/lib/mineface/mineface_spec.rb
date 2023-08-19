@@ -218,6 +218,13 @@ RSpec.describe Mineface::Face do
 
 			# TODO: add case of GetSkinUrlError
 		end
+
+		describe "get_face_image()"
+		describe "request!()"
+	end
+
+	describe "instance variables" do
+		
 	end
 
 	describe "error class" do
@@ -229,6 +236,30 @@ RSpec.describe Mineface::Face do
 			end
 		end
 
+		describe "GetProfileError" do
+			it "raise GetProfileError" do
+				expect{
+					raise Mineface::GetProfileError
+				}.to raise_error(Mineface::GetProfileError)
+			end
+		end
+
+		describe "GetSkinUrlError" do
+			it "raise GetSkinUrlError" do
+				expect{
+					raise Mineface::GetSkinUrlError
+				}.to raise_error(Mineface::GetSkinUrlError)
+			end
+		end
+
+		describe "FaceRequestError" do
+			it "raise FaceRequestError" do
+				expect{
+					raise Mineface::FaceRequestError
+				}.to raise_error(Mineface::FaceRequestError)
+			end
+		end
+
 		describe "APIRequestError" do
 			it "raise APIRequestError" do
 				expect{
@@ -236,7 +267,6 @@ RSpec.describe Mineface::Face do
 				}.to raise_error(Mineface::APIRequestError)
 			end
 		end
-
-		# TODO: add others Error class
+		# TODO: check message of Errors
 	end
 end

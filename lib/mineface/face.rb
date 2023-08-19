@@ -61,11 +61,15 @@ module Mineface
 			raise ArgumentError unless size.kind_of? Integer
 			raise ArgumentError unless size%8==0
 
-			image = image = Magick::Image.read(skin_image_url).first
-			image = image.crop(8,8,8,8)   # crop face area.
-			image.sample!(size,size)   # resize image.
+			image = Magick::Image.read(skin_image_url).first
 
-			return image   # => Magick::Image
+			_face = image.crop(8,8,8,8)   # crop face area.
+			_face.sample!(size,size)   # resize image.
+			_ornaments = image.crop(40,8,8,8)   # crop ornaments area.
+			_ornaments.sample!(size,size)
+			_face.composite!(_ornaments, 0, 0, Magick::OverCompositeOp)
+
+			return _face   # => Magick::Image
 		end
 
 		def request_json _url=""

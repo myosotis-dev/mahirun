@@ -10,10 +10,13 @@ Rails.application.routes.draw do
     end
   end
 
-  # namespace :minecraft do
-  #   namespace :api do
-  #     namespace :v1 do
-  #     end
-  #   end
-  # end
+  namespace :minecraft do
+    namespace :api do
+      namespace :v1 do
+        namespace :texture do
+          resources :face, only: [:show]
+        end
+      end
+    end
+  end
 end

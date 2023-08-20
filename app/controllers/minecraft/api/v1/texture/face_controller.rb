@@ -1,4 +1,4 @@
-class Minecraft::Api::V1::FaceController < ApplicationController
+class Minecraft::Api::V1::Texture::FaceController < ApplicationController
 	def show
 		@face = Mineface::Face.new name: params[:id]
 		begin

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       db:
-        image: mysql:8.1.0-oracle
+        image: mysql:8.2.0-oracle
         ports:
           - 3306:3306
         env:

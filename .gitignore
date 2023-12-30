@@ -7,6 +7,9 @@
 # macOS
 .DS_Store
 
+# credentials
+.env
+
 # Ignore bundler config.
 /.bundle
 

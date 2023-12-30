@@ -24,6 +24,28 @@ services:
       retries: 4
       start_period: 10s
 
+  keycloak:
+    tty: true
+    image: quay.io/keycloak/keycloak:22.0.1
+    container_name: keycloak
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    environment:
+      - KC_DB=mysql
+      - KC_DB_URL=jdbc:mysql://mysql:3306/keycloak
+      - KC_DB_URL_DATABASE=keycloak
+      - KC_HOSTNAME_STRICT='false'
+      - KC_HTTP_ENABLED='true'
+      - KC_HOSTNAME_STRICT_HTTPS='false'
+    ports:
+      - 8080:8080
+    command:
+      # - "start"
+      - "start-dev"   # on development mode.
+
   mysql:
     image: mysql:8.2.0-oracle   # arm image (only oracle linux base)
     container_name: mysql

@@ -9,6 +9,8 @@ This is TKYcraft BackEnd API for Discord bot.
 on your Docker host.
 
 ```bash
+cp .env.sample .env   # create .env file.
+
 docker compose up -d --build   # up containers with build process.
 docker compose ps   # check running containers.
 docker compose down   # down containers.

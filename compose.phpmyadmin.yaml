@@ -1,0 +1,22 @@
+services:
+  phpmyadmin:
+    image: phpmyadmin:latest
+    depends_on:
+      mysql:
+        condition: service_healthy
+    container_name: phpmyadmin
+    env_file:
+      - ./.env
+    environment:
+      - PMA_ARBITRARY=3
+      - PMA_HOSTS=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 8088:80
+    healthcheck:
+      test: ["CMD", "curl", "-m", "5", "http://localhost/"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 10s
